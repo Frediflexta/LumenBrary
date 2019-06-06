@@ -14,3 +14,16 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+/**
+ * Lumenbrary Routes
+ */
+$router->group(['prefix' => 'api/v1'], function() use($router) {
+    /**
+     * Unprotected Routes
+     */
+
+    /**
+     * Protected Routes
+     */
+});
