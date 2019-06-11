@@ -12,7 +12,7 @@ class Author extends Model
    * @var array
    */
   protected $fillable = [
-      'name', 'email', 'bio'
+    'name', 'email', 'bio'
   ];
 
 
@@ -23,6 +23,6 @@ class Author extends Model
    */
   public function books()
   {
-      return $this->hasMany('App\Book', 'author_id');
+    return $this->hasMany('App\Book', 'author_id', 'id');
   }
 }
