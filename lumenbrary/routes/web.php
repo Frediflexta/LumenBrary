@@ -22,6 +22,13 @@ $router->group(['prefix' => 'api/v1'], function() use($router) {
     /**
      * Unprotected Routes
      */
+    $router->group(['prefix' => '/books'], function() use($router) {
+        $router->get('/{id}', 'BooksController@show');
+    });
+
+    $router->group(['prefix' => '/authors'], function() use($router) {
+        $router->get('/{id}', 'AuthorController@show');
+    });
 
     /**
      * Protected Routes

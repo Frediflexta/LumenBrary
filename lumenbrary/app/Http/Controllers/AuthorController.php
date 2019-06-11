@@ -7,6 +7,20 @@ use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
+    /**
+   * Retrieve the auhtor for the given ID.
+   *
+   * @param  int  $id
+   * @return Response
+   */
+  public function show($id)
+  {
+    if(empty(Author::find($id))) {
+      return response()->json(['error' => 'Author does not exist'], 404);
+    }
+    return response()->json(Author::find($id), 200);
+  }
+
   /**
    * Store a new author.
    *
