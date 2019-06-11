@@ -16,6 +16,13 @@ class Book extends Model
   ];
 
   /**
+   * The attributes excluded from the model's JSON form.
+   *
+   * @var array
+   */
+  protected $hidden = ['author_id', 'created_at', 'updated_at'];
+
+  /**
    * Relationship: Author
    *
    * @return Illuminate\Database\Eloquent\Relations\BelongsTo
