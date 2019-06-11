@@ -26,4 +26,11 @@ $router->group(['prefix' => 'api/v1'], function() use($router) {
     /**
      * Protected Routes
      */
+    $router->group(['prefix' => '/books'], function() use($router) {
+        $router->post('/', 'BooksController@store');
+    });
+
+    $router->group(['prefix' => '/authors'], function() use(&$router) {
+        $router->post('/', 'AuthorController@store');
+    });
 });
