@@ -16,7 +16,7 @@ class BooksController extends Controller
   public function show($id)
   {
     if(!Book::find($id)) {
-      return response()->json(['error' => 'Book does not exist'], 404);
+      return response()->json(['message' => 'Book does not exist'], 404);
     }
     return response()->json(Book::find($id), 200);
   }
@@ -62,5 +62,21 @@ class BooksController extends Controller
     $book->update($request->all());
 
     return response()->json($book, 200);
+  }
+
+  /**
+   * Delete a book
+   *
+   * @param int $id
+   * @return void
+   */
+  public function destroy($id)
+  {
+    if(!Book::find($id)) {
+      return response()->json(['message' => 'Book does not exist'], 404);
+    }
+
+    Book::findOrFail($id)->delete();
+    return response()->json(['message' => 'Book has been deleted successfully'], 204);
   }
 }

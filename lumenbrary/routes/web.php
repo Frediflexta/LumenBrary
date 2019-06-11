@@ -36,10 +36,12 @@ $router->group(['prefix' => 'api/v1'], function() use($router) {
     $router->group(['prefix' => '/books'], function() use($router) {
         $router->post('/', 'BooksController@store');
         $router->put('/{id}', 'BooksController@update');
+        $router->delete('/{id}', 'BooksController@destroy');
     });
 
     $router->group(['prefix' => '/authors'], function() use($router) {
         $router->post('/', 'AuthorController@store');
         $router->put('/{id}', 'AuthorController@update');
+        $router->delete('/{id}', 'AuthorController@destroy');
     });
 });
