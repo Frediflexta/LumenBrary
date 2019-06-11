@@ -26,4 +26,27 @@ class BooksController extends Controller
     $book = Book::create($request->all());
     return response()->json($book, 201);
   }
+
+  /**
+   * Update the given book.
+   *
+   * @param  Request  $request
+   * @param  string  $id
+   * @return Response
+  */
+  public function update(Request $request, $id)
+  {
+    $book = Book::findOrFail($id);
+
+    $this->validate($request, [
+      'title' => 'required',
+      'description' => 'required',
+      'genre' => 'required',
+      'availability' => 'required',
+      'author_id' => 'required'
+    ]);
+    $book->update($request->all());
+
+    return response()->json($book, 200);
+  }
 }
