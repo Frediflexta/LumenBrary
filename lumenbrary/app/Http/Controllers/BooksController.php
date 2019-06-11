@@ -8,6 +8,20 @@ use Illuminate\Http\Request;
 class BooksController extends Controller
 {
   /**
+   * Retrieve the book for the given ID.
+   *
+   * @param  int  $id
+   * @return Response
+   */
+  public function show($id)
+  {
+    if(!Book::find($id)) {
+      return response()->json(['error' => 'Book does not exist'], 404);
+    }
+    return response()->json(Book::find($id), 200);
+  }
+
+  /**
    * Store a new book.
    *
    * @param  Request  $request
