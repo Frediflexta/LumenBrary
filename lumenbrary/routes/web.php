@@ -20,28 +20,40 @@ $router->get('/', function () use ($router) {
  */
 $router->group(['prefix' => 'api/v1'], function() use($router) {
     /**
+     * Auth
+     */
+    $router->group(['prefix' => 'auth'], function() use($router) {
+        $router->post('/register', 'UserController@register');
+        $router->post('/login', 'UserController@login');
+    });
+
+    /**
      * Unprotected Routes
      */
     $router->group(['prefix' => '/books'], function() use($router) {
+        $router->get('/', 'BooksController@index');
         $router->get('/{id}', 'BooksController@show');
     });
 
     $router->group(['prefix' => '/authors'], function() use($router) {
+        $router->get('/', 'AuthorController@index');
         $router->get('/{id}', 'AuthorController@show');
     });
 
     /**
      * Protected Routes
      */
-    $router->group(['prefix' => '/books'], function() use($router) {
-        $router->post('/', 'BooksController@store');
-        $router->put('/{id}', 'BooksController@update');
-        $router->delete('/{id}', 'BooksController@destroy');
-    });
+    $router->group(['middleware' => 'jwt.auth'], function() use(&$router) {
+        $router->group(['prefix' => '/books'], function() use($router) {
+            $router->post('/', 'BooksController@store');
+            $router->put('/{id:\d+}', 'BooksController@update');
+            $router->delete('/{id}', 'BooksController@destroy');
+        });
 
-    $router->group(['prefix' => '/authors'], function() use($router) {
-        $router->post('/', 'AuthorController@store');
-        $router->put('/{id}', 'AuthorController@update');
-        $router->delete('/{id}', 'AuthorController@destroy');
+        $router->group(['prefix' => '/authors'], function() use($router) {
+            $router->post('/', 'AuthorController@store');
+            $router->put('/{id}', 'AuthorController@update');
+            $router->delete('/{id}', 'AuthorController@destroy');
+        });
     });
 });
