@@ -16,5 +16,7 @@ class AuthorBooksTableSeeder extends Seeder
         factory(App\Author::class, 10)->create()->each(function ($author) {
             factory(App\Book::class, 50)->create(["author_id"=>$author->getKey()]);
         });
+
+        factory(App\User::class, 5)->create();
     }
 }
