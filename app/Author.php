@@ -15,11 +15,17 @@ class Author extends Model
     'name', 'email', 'bio'
   ];
 
+  /**
+   * The attributes excluded from the model's JSON form.
+   *
+   * @var array
+   */
+  protected $hidden = ['created_at', 'updated_at'];
 
   /**
    * Relationship: Books
    *
-  //  * @return Illuminate\Database\Eloquent\Relations\HasMany
+   * @return Illuminate\Database\Eloquent\Relations\HasMany
    */
   public function books()
   {

@@ -7,7 +7,37 @@ use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
-    /**
+  /**
+   * Returns all the Authors
+   *
+   * @return void
+   */
+  public function index(Request $request)
+  {
+    $authors = Author::with('books');
+
+    if($request->has('sort')) {
+      $values = explode('_', $request->sort);
+      $authors->orderBy($values[0], $values[1]);
+    }
+
+    if($request->has('name')) {
+      $keyword = strtolower($request->name);
+      $authors->whereRaw('LOWER(name) like (?)', "%{$keyword}%");
+    }
+
+    if($request->has('limit')) {
+      $authors->limit($request->limit);
+    }
+
+    if($request->has('offset')) {
+      $authors->offset($request->offset);
+    }
+
+    return $authors->get();
+  }
+
+  /**
    * Retrieve the auhtor for the given ID.
    *
    * @param  int  $id

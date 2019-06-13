@@ -8,6 +8,39 @@ use Illuminate\Http\Request;
 class BooksController extends Controller
 {
   /**
+   * Returns all the books
+   *
+   * @return void
+   */
+  public function index(Request $request)
+  {
+    $books = Book::with('author');
+    if($request->has('availability')) {
+      $books->where('availability', $request->availability === 'true' ? true: false);
+    }
+
+    if($request->has('sort')) {
+      $values = explode('_', $request->sort);
+      $books->orderBy($values[0], $values[1]);
+    }
+
+    if($request->has('search')) {
+      $keyword = strtolower($request->search);
+      $books->whereRaw('LOWER(title) like (?)', "%{$keyword}%");
+    }
+
+    if ($request->has('limit')) {
+      $books->limit($request->limit);
+    }
+
+    if ($request->has('offset')) {
+      $books->offset($request->offset);
+    }
+
+    return $books->get();
+  }
+
+  /**
    * Retrieve the book for the given ID.
    *
    * @param  int  $id
@@ -15,6 +48,10 @@ class BooksController extends Controller
    */
   public function show($id)
   {
+    if((int)$id === 0) {
+      return response()->json(['error' => 'Params must be an integer']);
+    }
+
     if(!Book::find($id)) {
       return response()->json(['message' => 'Book does not exist'], 404);
     }
@@ -50,6 +87,10 @@ class BooksController extends Controller
   */
   public function update(Request $request, $id)
   {
+    if((int)$id === 0) {
+      return response()->json(['error' => 'Params must be an integer']);
+    }
+
     $book = Book::findOrFail($id);
 
     $this->validate($request, [
