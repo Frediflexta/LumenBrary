@@ -62,7 +62,7 @@ class UserController extends Controller
         'email' => $user->email,
         'token' => $this->jwt($user)
       ]
-    ]);
+      ], 201);
   }
 
   /**
@@ -82,7 +82,7 @@ class UserController extends Controller
 
     if(!$user) {
       return response()->json([
-        'error' => 'Email does not exist'
+        'error' => 'Invalid credentails, please try again'
       ], 400);
     }
 

@@ -1,3 +1,7 @@
+[![CircleCI](https://circleci.com/gh/Frediflexta/LumenBrary.svg?style=svg)](https://circleci.com/gh/Frediflexta/LumenBrary)
+[![Maintainability](https://api.codeclimate.com/v1/badges/33f08dbdd32bacc89004/maintainability)](https://codeclimate.com/github/Frediflexta/LumenBrary/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/33f08dbdd32bacc89004/test_coverage)](https://codeclimate.com/github/Frediflexta/LumenBrary/test_coverage)
+
 # LumenBrary
 This project is a library that keeps a good record of all its books.
 
