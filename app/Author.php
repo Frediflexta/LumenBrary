@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Author extends Model
 {
+
+  protected $primaryKey = 'id';
+
   /**
    * The attributes that are mass assignable.
    *

@@ -7,7 +7,7 @@ use App\User;
 class UserAuthenticationTest extends TestCase
 {
     use DatabaseMigrations;
-
+    
     /**
      * successfully register a user
      *

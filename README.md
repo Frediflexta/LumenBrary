@@ -17,9 +17,9 @@ This project is a library that keeps a good record of all its books.
 + Update `.env` file to configure your `DATABASE`, `APP_KEY` and `JWT_SECRET`, please refer to `.env.example` for references.
 
 ## Running the application
-+ `php artisan migrate:fresh --seed` to create and seed the database.
++ run `php artisan migrate:fresh --seed` to create and seed the database.
 
-+ `php -S localhost:8000 -t public` to start your server.
++ run `php -S localhost:8000 -t public` to start your server.
 
 ### Endpoints
 
