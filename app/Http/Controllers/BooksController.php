@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Book;
+use App\Author;
 use Illuminate\Http\Request;
 
 class BooksController extends Controller
@@ -49,7 +50,7 @@ class BooksController extends Controller
   public function show($id)
   {
     if((int)$id === 0) {
-      return response()->json(['error' => 'Params must be an integer']);
+      return response()->json(['error' => 'Params must be an integer'], 400);
     }
 
     if(!Book::find($id)) {
@@ -74,6 +75,10 @@ class BooksController extends Controller
       'author_id' => 'required'
     ]);
 
+    if(!Author::find($request->author_id)){
+      return response()->json(['error' => 'Author does not exist, please create an author first'], 400);
+    }
+
     $book = Book::create($request->all());
     return response()->json($book, 201);
   }
@@ -88,7 +93,7 @@ class BooksController extends Controller
   public function update(Request $request, $id)
   {
     if((int)$id === 0) {
-      return response()->json(['error' => 'Params must be an integer']);
+      return response()->json(['error' => 'Params must be an integer'], 400);
     }
 
     $book = Book::findOrFail($id);

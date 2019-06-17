@@ -15,7 +15,7 @@ class CreateBooksTable extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title');
+            $table->string('title')->title();
             $table->text('description');
             $table->enum('genre', ['fiction', 'non-fiction']);
             $table->boolean('availability');

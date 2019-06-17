@@ -1,0 +1,29 @@
+version: 2.0
+jobs:
+  build:
+    docker:
+      - image: circleci/php:7.1-node-browsers
+        environment:
+          CC_TEST_REPORTER_ID: $CC_TEST_REPORTER_ID
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+         name: Setup Laravel testing environment variables for CircleCI test
+         command: cp .env.example .env
+      - run: sudo composer self-update
+      - restore_cache:
+          keys:
+            - composer-v1-{{ checksum "composer.json" }}
+            - composer-v1-
+      - run: composer install -n --prefer-dist
+      - save_cache:
+          key: composer-v1-{{ checksum "composer.json" }}
+          paths:
+            - vendor
+      - run: curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+      - run: chmod +x ./cc-test-reporter
+      - run: sudo mkdir -p $CIRCLE_TEST_REPORTS/phpunit
+      - run: ./cc-test-reporter before-build
+      - run: sudo vendor/bin/phpunit --coverage-clover clover.xml
+      - run: ./cc-test-reporter after-build -t clover --exit-code $?

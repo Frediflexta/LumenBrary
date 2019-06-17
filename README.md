@@ -1,3 +1,7 @@
+[![CircleCI](https://circleci.com/gh/Frediflexta/LumenBrary.svg?style=svg)](https://circleci.com/gh/Frediflexta/LumenBrary)
+[![Maintainability](https://api.codeclimate.com/v1/badges/33f08dbdd32bacc89004/maintainability)](https://codeclimate.com/github/Frediflexta/LumenBrary/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/33f08dbdd32bacc89004/test_coverage)](https://codeclimate.com/github/Frediflexta/LumenBrary/test_coverage)
+
 # LumenBrary
 This project is a library that keeps a good record of all its books.
 
@@ -13,9 +17,9 @@ This project is a library that keeps a good record of all its books.
 + Update `.env` file to configure your `DATABASE`, `APP_KEY` and `JWT_SECRET`, please refer to `.env.example` for references.
 
 ## Running the application
-+ `php artisan migrate:fresh --seed` to create and seed the database.
++ run `php artisan migrate:fresh --seed` to create and seed the database.
 
-+ `php -S localhost:8000 -t public` to start your server.
++ run `php -S localhost:8000 -t public` to start your server.
 
 ### Endpoints
 
