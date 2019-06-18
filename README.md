@@ -21,6 +21,8 @@ This project is a library that keeps a good record of all its books.
 
 + run `php -S localhost:8000 -t public` to start your server.
 
++ [Hosted Link](https://lumenbrary.herokuapp.com) **NB: to test msot of the protected routes, please use services like postman/insomnia to try out the endpoints listed below**
+
 ### Endpoints
 
 | Methods | Endpoints | Params
